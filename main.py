@@ -18,6 +18,7 @@ model.setInputScale(1.0/127.5)
 model.setInputMean((127.5, 127.5, 127.5))
 model.setInputSwapRB(True)
 
+# Pasirenkamas vaizdo šaltinis
 vid = cv2.VideoCapture(0)
 
 if not vid.isOpened():
@@ -28,6 +29,7 @@ if not vid.isOpened():
 font_scale = 4
 font = cv2.FONT_HERSHEY_PLAIN
 
+# Paleidžiamas ciklas skaitantis ir klasifikuojantis kiekvieną video kadrą
 while True:
     ret, frame = vid.read()
 
