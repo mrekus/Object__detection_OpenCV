@@ -13,7 +13,7 @@ with open(label_file, "r") as f:
 
 # Modelio nustatymai
 model.setInputSize(320, 320)
-model.setInputScale(1.0/127.5)
+model.setInputScale(1.0 / 127.5)
 model.setInputMean((127.5, 127.5, 127.5))
 model.setInputSwapRB(True)
 
@@ -35,14 +35,24 @@ while True:
     ClassIndex, confidence, bbox = model.detect(frame, confThreshold=0.5)
 
     if len(ClassIndex) != 0:
-        for ClassInd, conf, boxes in zip(ClassIndex.flatten(), confidence.flatten(), bbox):
+        for ClassInd, conf, boxes in zip(
+            ClassIndex.flatten(), confidence.flatten(), bbox
+        ):
             if ClassInd <= 80:
                 cv2.rectangle(frame, boxes, (255, 0, 0), 2)
-                cv2.putText(frame, classLabels[ClassInd - 1], (boxes[0] + 10, boxes[1] + 40), font, fontScale=font_scale, color=(0, 255, 0), thickness=3)
+                cv2.putText(
+                    frame,
+                    classLabels[ClassInd - 1],
+                    (boxes[0] + 10, boxes[1] + 40),
+                    font,
+                    fontScale=font_scale,
+                    color=(0, 255, 0),
+                    thickness=3,
+                )
 
     cv2.imshow("Camera Feed", frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 vid.release()
