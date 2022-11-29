@@ -36,7 +36,7 @@ while True:
 
     if len(ClassIndex) != 0:
         for ClassInd, conf, boxes in zip(
-            ClassIndex.flatten(), confidence.flatten(), bbox
+            ClassIndex, confidence, bbox
         ):
             if ClassInd <= 80:
                 cv2.rectangle(frame, boxes, (255, 0, 0), 2)
