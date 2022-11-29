@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 config_file = "model_config/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
 frozen_model = "ssd_mobilenet_v3_large_coco_2020_01_14/frozen_inference_graph.pb"
@@ -25,7 +26,7 @@ if not vid.isOpened():
 if not vid.isOpened():
     raise IOError("Cannot open camera")
 
-font_scale = 4
+font_scale = 2
 font = cv2.FONT_HERSHEY_PLAIN
 
 # Paleidžiamas ciklas skaitantis ir klasifikuojantis kiekvieną video kadrą
@@ -47,6 +48,15 @@ while True:
                     font,
                     fontScale=font_scale,
                     color=(0, 255, 0),
+                    thickness=3,
+                )
+                cv2.putText(
+                    frame,
+                    f"Conf: {str(conf)[:4]}",
+                    (boxes[0] + 10, boxes[1] + 70),
+                    font,
+                    fontScale=font_scale,
+                    color=(0, 0, 255),
                     thickness=3,
                 )
 
